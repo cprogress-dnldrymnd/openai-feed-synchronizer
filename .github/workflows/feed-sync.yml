@@ -14,6 +14,8 @@ jobs:
   sync:
     runs-on: ubuntu-latest
     timeout-minutes: 15
+    env:
+      SFTP_PASSWORD: ${{ secrets.SFTP_PASSWORD }}
     steps:
       - name: Checkout
         uses: actions/checkout@v4
@@ -28,7 +30,7 @@ jobs:
         run: npm ci
 
       - name: Write SFTP private key
-        if: ${{ secrets.SFTP_PASSWORD == '' }}
+        if: ${{ env.SFTP_PASSWORD == '' }}
         run: |
           echo "${{ secrets.SFTP_PRIVATE_KEY_B64 }}" | base64 -d > openai_sftp_key.pem
           chmod 600 openai_sftp_key.pem
@@ -42,7 +44,6 @@ jobs:
           SFTP_USERNAME: ${{ secrets.SFTP_USERNAME }}
           SFTP_UPLOAD_PATH: ${{ secrets.SFTP_UPLOAD_PATH }}
           PRIVATE_KEY_PATH: ./openai_sftp_key.pem
-          SFTP_PASSWORD: ${{ secrets.SFTP_PASSWORD }}
           STOREFRONT_URL: https://coptrz.com
           SELLER_NAME: Coptrz
           TARGET_COUNTRY: GB
