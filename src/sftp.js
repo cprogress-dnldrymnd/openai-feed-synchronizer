@@ -32,6 +32,13 @@ export async function uploadFeed(gzBuffer, env) {
         await sftp.connect(connectConfig);
 
         await sftp.put(gzBuffer, tmpRemotePath);
+
+        // OpenAI's SFTP is backed by Azure Blob Storage, whose SSH_FXP_RENAME does not
+        // support overwriting an existing blob — unlike a POSIX filesystem, rename fails
+        // with BlobAlreadyExists if the target is already there. Delete first, then rename.
+        if (await sftp.exists(remotePath)) {
+            await sftp.delete(remotePath);
+        }
         await sftp.rename(tmpRemotePath, remotePath);
 
         return { remotePath };
