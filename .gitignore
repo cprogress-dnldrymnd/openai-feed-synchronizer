@@ -1,0 +1,9 @@
+.env
+*.pem
+*.key
+openai_sftp_key*
+node_modules/
+out/
+*.csv
+*.csv.gz
+.feed-state.json

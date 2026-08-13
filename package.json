@@ -1,0 +1,17 @@
+{
+  "name": "openai-feed-synchronizer",
+  "version": "1.0.0",
+  "description": "Syncs the Coptrz Shopify catalogue to OpenAI Ads via SFTP product feed",
+  "type": "module",
+  "private": true,
+  "scripts": {
+    "authorize": "node scripts/authorize.js",
+    "sync": "node src/sync.js",
+    "sync:dry": "node src/sync.js --dry-run --limit 20"
+  },
+  "dependencies": {
+    "csv-stringify": "^6.5.0",
+    "dotenv": "^16.4.5",
+    "ssh2-sftp-client": "^11.0.0"
+  }
+}

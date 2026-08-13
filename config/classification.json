@@ -1,0 +1,29 @@
+{
+  "_comment": "Fallback classification rules, used only when a variant has no custom.product_line / custom.use_case / custom.bidding_tier metafield and no matching line:/usecase: tag. Marketing should prefer editing Shopify metafields over this file — this exists so ad_group filtering degrades gracefully instead of guessing.",
+
+  "productTypeToProductLine": {
+    "Enterprise Drone": "enterprise_drones",
+    "Consumer Drone": "consumer_drones",
+    "Drone Accessory": "accessories",
+    "Software": "software"
+  },
+
+  "vendorToUseCase": {
+    "DJI": "surveying",
+    "Autel": "surveying",
+    "Parrot": "inspection"
+  },
+
+  "biddingTierPriceBandsGBP": [
+    { "maxPrice": 500, "tier": "low" },
+    { "maxPrice": 2000, "tier": "standard" },
+    { "maxPrice": null, "tier": "high" }
+  ],
+
+  "priceBandsGBP": [
+    { "maxPrice": 250, "label": "under_250" },
+    { "maxPrice": 1000, "label": "250_to_1000" },
+    { "maxPrice": 5000, "label": "1000_to_5000" },
+    { "maxPrice": null, "label": "over_5000" }
+  ]
+}
